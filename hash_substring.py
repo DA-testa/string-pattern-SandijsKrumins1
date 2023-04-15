@@ -6,7 +6,7 @@ def read_input():
         p = input().rstrip()
         t = input().rstrip()
     else:
-        filename= input()
+        filename= "06"
         folder = './tests/'
         file = open(folder + filename, 'r')
         p = file.readline().rstrip()
