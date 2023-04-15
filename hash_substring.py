@@ -10,9 +10,6 @@ def read_input():
     else:
         print("Input File: ")
         filename= input()
-        if "a" in filename:
-            print("Filename containing a is not allowed")
-            return
         folder = './tests/'
         file = open(folder + filename, 'r')
         p = file.readline().rstrip()
