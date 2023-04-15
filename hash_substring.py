@@ -1,14 +1,11 @@
 # python3
 
 def read_input():
-    print("Input Mode: ")
     mode = input()
     if "I" in mode:
-        print("Input: ")
         p = input().rstrip()
         t = input().rstrip()
     else:
-        print("Input File: ")
         filename= input()
         folder = './tests/'
         file = open(folder + filename, 'r')
