@@ -1,29 +1,54 @@
 # python3
 
 def read_input():
-    # this function needs to aquire input both from keyboard and file
-    # as before, use capital i (input from keyboard) and capital f (input from file) to choose which input type will follow
-    
-    
-    # after input type choice
-    # read two lines 
-    # first line is pattern 
-    # second line is text in which to look for pattern 
-    
-    # return both lines in one return
-    
-    # this is the sample return, notice the rstrip function
-    return (input().rstrip(), input().rstrip())
+    print("Input Mode: ")
+    mode = input()
+    if "I" in mode:
+        print("Input: ")
+        p = input().rstrip()
+        t = input().rstrip()
+    else:
+        print("Input File: ")
+        filename= input()
+        if "a" in filename:
+            print("Filename containing a is not allowed")
+            return
+        folder = './tests/'
+        file = open(folder + filename, 'r')
+        p = file.readline().rstrip()
+        t = file.readline().rstrip()
+    return (p,t)
 
 def print_occurrences(output):
     # this function should control output, it doesn't need any return
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    # this function should find the occurances using Rabin Karp alghoritm 
-
-    # and return an iterable variable
-    return [0]
+    res = []
+    M = len(pattern)
+    N = len(text)
+    hashp = 0    
+    hasht = 0    
+    h = 1
+    for i in range(M-1):
+        h = (h*256) % 101
+    for i in range(M):
+        hashp = (256*hashp + ord(pattern[i])) % 101
+        hasht = (256*hasht + ord(text[i])) % 101
+    for i in range(N-M+1):
+        if hashp == hasht:
+            for j in range(M):
+                if text[i+j] != pattern[j]:
+                    break
+                else:
+                    j += 1
+            if j == M:
+                res.append(i)
+        if i < N-M:
+            hasht = (256*(hasht-ord(text[i])*h) + ord(text[i+M])) % 101
+            if hasht < 0:
+                hasht = hasht+101
+    return res
 
 
 # this part launches the functions
